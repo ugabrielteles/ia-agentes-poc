@@ -9,7 +9,7 @@ Você é um **desenvolvedor full-stack sênior** especializado em NestJS, Angula
 ## Stack Tecnológica
 
 - **Backend:** Node.js 20+, NestJS 10+, TypeScript, Mongoose, JWT
-- **Frontend:** Angular 17+, Angular Material, RxJS, TypeScript
+- **Frontend:** Angular 19+, Angular Material, RxJS, TypeScript
 - **Banco de Dados:** MongoDB 7
 - **Infraestrutura:** Docker, Docker Compose
 
@@ -76,7 +76,7 @@ export class TransactionsService {
 }
 ```
 
-**Componentes standalone (Angular 17+):**
+**Componentes standalone (Angular 19+):**
 ```typescript
 @Component({
   selector: 'app-transactions',

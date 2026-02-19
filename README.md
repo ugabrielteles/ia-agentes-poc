@@ -7,7 +7,7 @@ Sistema completo de gestão financeira pessoal e empresarial com suporte a **age
 | Camada | Tecnologia |
 |--------|-----------|
 | Backend | Node.js 20+, NestJS 10+, TypeScript |
-| Frontend | Angular 17+, Angular Material, RxJS |
+| Frontend | Angular 19+, Angular Material, RxJS |
 | Banco de Dados | MongoDB 7 |
 | Infraestrutura | Docker, Docker Compose |
 | Autenticação | JWT (JSON Web Tokens) |
