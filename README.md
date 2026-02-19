@@ -196,7 +196,7 @@ Na tela de configuração de menus, arraste os itens para reorganizar a ordem de
 
 ## 🤖 Agentes de IA (GitHub Copilot)
 
-O projeto inclui 4 agentes personalizados do GitHub Copilot em `.github/agents/`:
+O projeto inclui 5 agentes personalizados do GitHub Copilot em `.github/agents/`:
 
 ### `po-agent` — Product Owner
 - Cria issues com critérios de aceitação em BDD (Dado/Quando/Então)
@@ -242,6 +242,17 @@ O projeto inclui 4 agentes personalizados do GitHub Copilot em `.github/agents/`
 @dev-agent Implemente o filtro por categoria nas transações
 ```
 
+### `db-agent` — Especialista em Banco de Dados
+- Cria e otimiza schemas Mongoose (MongoDB) e entities TypeORM (SQL)
+- Gera migrations e índices para performance
+- Escreve queries otimizadas para bancos relacionais e não relacionais
+- Aplica boas práticas de modelagem para o domínio financeiro
+
+**Como usar:**
+```
+@db-agent Crie um índice composto para otimizar a busca de transações por usuário e data
+```
+
 ---
 
 ## 📁 Estrutura de Pastas
@@ -255,7 +266,8 @@ ia-agentes-poc/
 │       ├── po-agent.md       # Agente Product Owner
 │       ├── ux-agent.md       # Agente UX/UI
 │       ├── qa-agent.md       # Agente QA
-│       └── dev-agent.md      # Agente Desenvolvedor
+│       ├── dev-agent.md      # Agente Desenvolvedor
+│       └── db-agent.md       # Agente Banco de Dados
 ├── backend/
 │   ├── Dockerfile
 │   ├── package.json
