@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { MenuConfig } from '../models/menu-config.model';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +13,23 @@ export class MenuService {
 
   menus$ = this.menusSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
+
+  private getMenuId(menu: MenuConfig): string | undefined {
+    return menu.id || (menu as MenuConfig & { _id?: string })._id;
+  }
+
+  private getParentMenuId(menu: MenuConfig): string | undefined {
+    if (!menu.parentMenu) {
+      return undefined;
+    }
+
+    if (typeof menu.parentMenu === 'string') {
+      return menu.parentMenu;
+    }
+
+    return this.getMenuId(menu.parentMenu);
+  }
 
   /**
    * Carrega os menus disponíveis para o usuário atual baseado no seu role
@@ -48,19 +63,35 @@ export class MenuService {
 
     // Mapear todos os menus por ID
     menus.forEach((menu) => {
-      menuMap.set(menu.id!, { ...menu, children: [] });
+      const menuId = this.getMenuId(menu);
+      if (!menuId) {
+        return;
+      }
+      menuMap.set(menuId, { ...menu, id: menuId, children: [] });
     });
 
     // Organizar hierarquia
     menus.forEach((menu) => {
-      const menuItem = menuMap.get(menu.id!)!;
-      if (menu.parentMenu && typeof menu.parentMenu === 'string') {
-        const parent = menuMap.get(menu.parentMenu);
+      const menuId = this.getMenuId(menu);
+      if (!menuId) {
+        return;
+      }
+
+      const menuItem = menuMap.get(menuId);
+      if (!menuItem) {
+        return;
+      }
+
+      const parentMenuId = this.getParentMenuId(menu);
+      if (parentMenuId) {
+        const parent = menuMap.get(parentMenuId);
         if (parent) {
           parent.children = parent.children || [];
           parent.children.push(menuItem);
+        } else {
+          rootMenus.push(menuItem);
         }
-      } else if (!menu.parentMenu) {
+      } else {
         rootMenus.push(menuItem);
       }
     });

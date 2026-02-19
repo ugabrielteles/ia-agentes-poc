@@ -5,7 +5,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { AuthService } from '../../core/services/auth.service';
+import { MatChipsModule } from '@angular/material/chips';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,7 @@ import { AuthService } from '../../core/services/auth.service';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    MatChipsModule,
   ],
   template: `
     <mat-toolbar color="primary" class="navbar" role="banner">

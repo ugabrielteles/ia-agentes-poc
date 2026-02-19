@@ -27,8 +27,21 @@ async function bootstrap() {
 
   // Habilitar CORS
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:4200',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      const isLocalhostOrigin = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+      const configuredOrigin = process.env.FRONTEND_URL;
+
+      if (isLocalhostOrigin || (configuredOrigin && origin === configuredOrigin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
 

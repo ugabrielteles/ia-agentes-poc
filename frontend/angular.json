@@ -24,7 +24,6 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -70,7 +69,8 @@
               "buildTarget": "financeiro-frontend:build:production"
             },
             "development": {
-              "buildTarget": "financeiro-frontend:build:development"
+              "buildTarget": "financeiro-frontend:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,6 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -93,5 +92,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "bb9031bd-ff57-4288-a586-b34f86b647c8"
   }
 }
